@@ -19,11 +19,12 @@ for i in range(0, 1000):
   review = review.split()
   ps = PorterStemmer()
   all_stopwords = stopwords.words('english')
+  #do remove words which u feel may be removed in stopwords which may impact the accuracy
   all_stopwords.remove('not')
+  all_stopwords.remove('isnt')
   review = [ps.stem(word) for word in review if not word in set(all_stopwords)]
   review = ' '.join(review)
   corpus.append(review)
-print(corpus)
 
 # Using Bag of Words model
 from sklearn.feature_extraction.text import CountVectorizer
@@ -47,4 +48,4 @@ print(np.concatenate((y_pred.reshape(len(y_pred),1), y_test.reshape(len(y_test),
 from sklearn.metrics import confusion_matrix, accuracy_score
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
-accuracy_score(y_test, y_pred)
+print(accuracy_score(y_test, y_pred))
